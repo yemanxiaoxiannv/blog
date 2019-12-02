@@ -4,7 +4,7 @@ import com.scs.web.blog.domain.dto.UserDto;
 import com.scs.web.blog.util.Result;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName UserService
  * @Description 用户业务逻辑接口
  * @Date 12:01 2019/11/9

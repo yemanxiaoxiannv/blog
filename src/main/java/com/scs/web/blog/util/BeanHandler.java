@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @ClassName BeanHandler
  * @Description 结果集和实体类的转换工具
- * @Author mq_xu
+ * @Author xxcai
  * @Date 2019/11/23
  **/
 public class BeanHandler {

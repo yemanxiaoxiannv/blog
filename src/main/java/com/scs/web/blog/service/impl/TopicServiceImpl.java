@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName TopicServiceImpl
  * @Description TODO
  * @Date 2019/11/16

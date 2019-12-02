@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName UserDaoImpl
  * @Description UserDao数据访问对象接口实现类
  * @Date 2019/11/9

@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * @ClassName MySqlServlet
  * @Description TODO
- * @Author mq_xu
+ * @Author xxcai
  * @Date 2019/11/22
  **/
 @WebServlet(urlPatterns = "/data")

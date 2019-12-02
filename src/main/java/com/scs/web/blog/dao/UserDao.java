@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName UserDao
  * @Description UserDao数据访问对象接口
  * @Date 10:54 2019/11/9

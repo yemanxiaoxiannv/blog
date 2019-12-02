@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName UserDto
  * @Description 用户传输对象
  * @Date 2019/11/9

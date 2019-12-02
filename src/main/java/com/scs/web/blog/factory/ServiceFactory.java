@@ -8,7 +8,7 @@ import com.scs.web.blog.service.impl.TopicServiceImpl;
 import com.scs.web.blog.service.impl.UserServiceImpl;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName ServiceFactory
  * @Description Service工厂类
  * @Date 10:56 2019/11/7

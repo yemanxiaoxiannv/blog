@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName TopicDaoImpl
  * @Description 专题Dao接口实现类
  * @Date 2019/11/16

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName JSoupSpider
  * @Description JSoup爬虫，抓取数据
  * @Date 9:13 2019/11/7
@@ -39,7 +39,7 @@ public class JSoupSpider {
         List<User> userList = new ArrayList<>(100);
         for (int i = 1; i <= PAGE_COUNT; i++) {
             try {
-                document = Jsoup.connect("https://www.jianshu.com/recommendations/users?utm_source=desktop&utm_medium=index-users&page=" + i).get();
+                document = Jsoup.connect("https://www.duitang.com/badge/category/user/?tag=全部" + i).get();
             } catch (IOException e) {
                 logger.error("连接失败");
             }

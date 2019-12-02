@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * @ClassName UploadController
  * @Description 上传图片控制器
- * @Author mq_xu
+ * @Author xxcai
  * @Date 2019/11/20
  **/
 @MultipartConfig(maxFileSize = 1024 * 1024 * 50)

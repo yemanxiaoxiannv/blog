@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * @ClassName LoginController
  * @Description TODO
- * @Author mq_xu
+ * @Author xxcai
  * @Date 2019/11/20
  **/
 @WebServlet(urlPatterns = "/api/login")

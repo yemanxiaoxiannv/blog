@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName ArticleDao
  * @Description 文章Dao接口
  * @Date 7:11 2019/11/10

@@ -3,7 +3,7 @@ package com.scs.web.blog.service;
 import com.scs.web.blog.util.Result;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName TopicService
  * @Description TODO
  * @Date 20:07 2019/11/16

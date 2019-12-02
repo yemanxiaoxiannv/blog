@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName CORSFilter
  * @Description 跨域过滤器
  * @Date 2019/10/3

@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName TopicController
  * @Description 专题控制器
  * @Date 2019/11/16

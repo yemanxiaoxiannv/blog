@@ -3,7 +3,7 @@ package com.scs.web.blog.service;
 import com.scs.web.blog.util.Result;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName ArticleService
  * @Description 文章服务层接口
  * @Date 2019/11/11

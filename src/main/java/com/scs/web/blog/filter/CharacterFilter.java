@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author mq_xu
+ * @author xxcai
  * @ClassName CharacterFilter
  * @Description 字符集过滤器,过滤请求和响应字符集，统一响应类型
  * @Date 15:56 2019/11/9

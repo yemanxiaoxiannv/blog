@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 /**
- * @author mqxu
+ * @author xxcai
  * Session监听器
  */
 @WebListener
