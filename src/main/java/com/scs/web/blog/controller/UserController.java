@@ -53,6 +53,7 @@ public class UserController extends HttpServlet {
         }
     }
 
+
     private void getHotUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Gson gson = new GsonBuilder().create();
         Result result = userService.getHotUsers();

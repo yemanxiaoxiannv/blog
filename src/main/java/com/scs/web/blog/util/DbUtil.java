@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.Properties;
 
 /**
- * @author xxcai
+ * @author mq_xu
  * @ClassName DbUtil
  * @Description 数据库连接工具类
  * @Date 2019/11/10
@@ -37,7 +37,7 @@ public class DbUtil {
         } catch (IOException e) {
             logger.error("数据库配置文件读写错误");
         } catch (ClassNotFoundException e) {
-            logger.error("数据库驱动 未找到");
+            logger.error("数据库驱动未找到");
         }
     }
 
@@ -48,7 +48,6 @@ public class DbUtil {
      * @return Connection 数据库连接
      */
     public static Connection getConnection() {
-
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(
@@ -127,5 +126,9 @@ public class DbUtil {
     public static void close(Connection connection, Statement statement, ResultSet resultSet) {
         close(connection, statement);
         close(resultSet);
+    }
+
+    public static void main(String[] args) {
+        DbUtil.getConnection();
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @ClassName BeanHandler
  * @Description 结果集和实体类的转换工具
- * @Author xxcai
+ * @Author mq_xu
  * @Date 2019/11/23
  **/
 public class BeanHandler {
@@ -97,7 +97,7 @@ public class BeanHandler {
                 author.setAvatar(rs.getString("avatar"));
 
                 //专题信息
-                Topic topic = new Topic    ();
+                Topic topic = new Topic();
                 topic.setId(rs.getLong("topic_id"));
                 topic.setTopicName(rs.getString("topic_name"));
                 topic.setLogo(rs.getString("logo"));

@@ -1,14 +1,16 @@
 package com.scs.web.blog.factory;
 
+import com.scs.web.blog.service.ArticleAddService;
 import com.scs.web.blog.service.ArticleService;
 import com.scs.web.blog.service.TopicService;
 import com.scs.web.blog.service.UserService;
+import com.scs.web.blog.service.impl.ArticleAddServiceImpl;
 import com.scs.web.blog.service.impl.ArticleServiceImpl;
 import com.scs.web.blog.service.impl.TopicServiceImpl;
 import com.scs.web.blog.service.impl.UserServiceImpl;
 
 /**
- * @author xxcai
+ * @author mq_xu
  * @ClassName ServiceFactory
  * @Description Service工厂类
  * @Date 10:56 2019/11/7
@@ -27,4 +29,7 @@ public class ServiceFactory {
         return new TopicServiceImpl();
     }
 
+    public static ArticleAddService getArticleAddServiceInstance() { return new ArticleAddServiceImpl(); }
+
 }
+
