@@ -35,4 +35,9 @@ public class User {
     private Integer articles;
     private LocalDateTime createTime;
     private Short status;
+
+    public User(String mobile, String password) {
+        this.mobile = mobile;
+        this.password = password;
+    }
 }

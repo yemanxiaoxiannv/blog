@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -167,5 +168,19 @@ public class TopicDaoImpl implements TopicDao {
         return topicList;
     }
 
+    @Override
+    public List<Topic> getTopicList() {
+        Connection connection = DbUtil.getConnection();
+        String sql = "select * from t_topic ;";
+        try {
+            PreparedStatement pst = connection.prepareStatement(sql);
+            ResultSet resultSet = pst.executeQuery();
+            List<Topic> topics = BeanHandler.convertTopic(resultSet);
+            return topics;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
 
 }

@@ -63,5 +63,5 @@ public interface TopicDao {
      * @throws SQLException
      */
     List<Topic> selectByKeywords(String keywords) throws SQLException;
-
+    List<Topic> getTopicList();
 }

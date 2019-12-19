@@ -3,7 +3,7 @@ package com.scs.web.blog.util;
 import lombok.Data;
 
 /**
- * @author zh_yan
+ * @author xxcai
  * @ClassName ResponseObject
  * @Description 统一响应对象
  * @Date 2019/10/10

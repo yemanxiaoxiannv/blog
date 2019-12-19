@@ -95,4 +95,10 @@ public class TopicServiceImpl implements TopicService {
             return Result.failure(ResultCode.RESULT_CODE_DATA_NONE);
         }
     }
+
+    @Override
+    public List<Topic> getTopicList() {
+        List<Topic> topicList = topicDao.getTopicList();
+        return topicList;
+    }
 }

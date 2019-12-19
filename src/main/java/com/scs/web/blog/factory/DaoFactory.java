@@ -30,4 +30,9 @@ public class DaoFactory {
 
     public static ArticleAddDao getArticleAddDaoInstance(){ return new ArticleAddDaoImpl(); }
 
+    public static LikeDao getLikeDaoInstance(){ return new LikeDaoimpl(); }
+
+    public static CommentDao getCommentDaoInstance(){return  new CommentDaoimpl();}
+
+    public  static TopicFollowDao getTopicFollowDaoInstance(){return  new TopicFollowDaoImpl();}
 }

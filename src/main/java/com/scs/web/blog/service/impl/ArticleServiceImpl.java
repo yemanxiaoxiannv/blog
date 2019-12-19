@@ -1,6 +1,7 @@
 package com.scs.web.blog.service.impl;
 
 import com.scs.web.blog.dao.ArticleDao;
+import com.scs.web.blog.dao.LikeDao;
 import com.scs.web.blog.domain.vo.ArticleVo;
 import com.scs.web.blog.factory.DaoFactory;
 import com.scs.web.blog.service.ArticleService;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author xxcai
+ * @author mq_xu
  * @ClassName ArticleServiceImpl
  * @Description TODO
  * @Date 22:49 2019/11/11
@@ -21,6 +22,7 @@ import java.util.List;
  **/
 public class ArticleServiceImpl implements ArticleService {
     private ArticleDao articleDao = DaoFactory.getArticleDaoInstance();
+    private LikeDao likeDao = DaoFactory.getLikeDaoInstance();
     private static Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Override
@@ -81,5 +83,62 @@ public class ArticleServiceImpl implements ArticleService {
         } else {
             return Result.failure(ResultCode.RESULT_CODE_DATA_NONE);
         }
+    }
+
+    @Override
+    public Result addByArticleAndUser(long article_id, long user_id) {
+        Boolean suucess = new Boolean("false") ;
+        try {
+            suucess = likeDao.addByArticleAndUser(article_id , user_id);
+        } catch (SQLException e) {
+            logger.error("添加喜欢");
+        }
+        if (suucess) {
+            return Result.success(suucess);
+        } else {
+            return Result.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
+    }
+
+    @Override
+    public Result deleteByArticleAndUser(long article_id, long user_id) {
+        Boolean suucess = new Boolean("false") ;
+        try {
+            suucess = likeDao.deleteByArticleAndUser(article_id , user_id);
+
+        } catch (SQLException e) {
+            logger.error("删除喜欢");
+        }
+        if (suucess) {
+            return Result.success(suucess);
+        } else {
+            return Result.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
+    }
+
+    @Override
+    public Result selectByArticleAndUser(long article_id, long user_id) {
+        Boolean suucess = new Boolean("false") ;
+        try {
+            suucess = likeDao.selectByArticleAndUser(article_id , user_id);
+        } catch (SQLException e) {
+            logger.error("查询喜欢");
+        }
+        if (suucess) {
+            return Result.success(suucess);
+        } else {
+            return Result.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
+    }
+
+    @Override
+    public void addArticle(int userId, int topicId, String title, String summary, String thumbnail, String content) {
+        articleDao.addArticle(userId, topicId, title, summary, thumbnail, content);
+    }
+
+    @Override
+    public Result deleteArticle(Long article, long userid) throws SQLException {
+        boolean art = articleDao.deleteArticle(article , userid);
+        return Result.success(art);
     }
 }

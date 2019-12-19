@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -130,5 +131,133 @@ public class UserDaoImpl implements UserDao {
         List<User> userList = BeanHandler.convertUser(rs);
         DbUtil.close(connection, pst, rs);
         return userList;
+    }
+
+    @Override
+    public User findUserById(Long userId) throws SQLException {
+        Connection connection = DbUtil.getConnection();
+        String sql = "SELECT * FROM t_user WHERE id = " + userId;
+        PreparedStatement pst = connection.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        List<User> userList = BeanHandler.convertUser(rs);
+        DbUtil.close(connection, pst, rs);
+        if (userList.size() > 0) {
+            return userList.get(0);
+        }
+        return new User();
+    }
+
+    @Override
+    public boolean updateInfo(int userId, String avatar, String nickname, String mobile, String password, String gender, LocalDate birthday, String introduction) {
+        Connection connection = DbUtil.getConnection();
+        try {
+            String sql = "UPDATE `t_user` t " +
+                    "SET t.`mobile` = ? , t.`password` = ? , t.`nickname` = ? , t.`avatar` = ? , t.`gender` = ? , t.`birthday` = ? , t.`introduction` = ? " +
+                    " WHERE t.`id` = ? ";
+            logger.info(sql);
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setString(1, mobile);
+            pst.setString(2, password);
+            pst.setString(3, nickname);
+            pst.setString(4, avatar);
+            pst.setString(5, gender);
+            pst.setObject(6, birthday);
+            pst.setString(7, introduction);
+            pst.setObject(8, userId);
+            int i = pst.executeUpdate();
+            DbUtil.close(connection, pst);
+            if (i > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addUserFans(long f_userId, long t_userId) throws SQLException {
+        Connection connection = DbUtil.getConnection();
+        boolean succuess = false;
+        String sql = "UPDATE `t_user` t " +
+                "SET t.`fans` = t.`fans` + 1 " +
+                " WHERE t.`id` = ?;";
+        String sql2 = "insert into t_user_follow (from_id, to_id) VALUES (? ,?);";
+        logger.info(sql);
+        PreparedStatement pst = connection.prepareStatement(sql);
+        PreparedStatement pst2 = connection.prepareStatement(sql2);
+        pst.setLong(1, t_userId);
+        pst2.setLong(1, f_userId);
+        pst2.setLong(2, t_userId);
+        int i = pst.executeUpdate();
+        int j = pst2.executeUpdate();
+        DbUtil.close(connection, pst);
+        DbUtil.close(connection, pst2);
+        if (i > 0 && j > 0) {
+            succuess = true;
+        }
+        DbUtil.close(connection, pst);
+        DbUtil.close(connection, pst2);
+        return succuess;
+    }
+
+    @Override
+    public boolean deleteUserFans(long f_userId, long t_userId) throws SQLException {
+        Connection connection = DbUtil.getConnection();
+        boolean succuess = false;
+        String sql = "UPDATE `t_user` t " +
+                "SET t.`fans` = t.`fans` - 1 " +
+                " WHERE t.`id` = ?;";
+        String sql2 = "delete from t_user_follow where from_id=? and to_id=?";
+        logger.info(sql);
+        PreparedStatement pst = connection.prepareStatement(sql);
+        PreparedStatement pst2 = connection.prepareStatement(sql2);
+        pst.setLong(1, t_userId);
+        pst2.setLong(1, f_userId);
+        pst2.setLong(2, t_userId);
+        int i = pst.executeUpdate();
+        int j = pst2.executeUpdate();
+        if (i > 0 && j > 0) {
+            succuess = true;
+        }
+        DbUtil.close(connection, pst);
+        DbUtil.close(connection, pst2);
+        return succuess;
+    }
+
+    @Override
+    public int selectUserFans(long f_userId, long t_userId) throws SQLException {
+        Connection connection = DbUtil.getConnection();
+        int succuess = 0;
+        String sql = "select  * from t_user_follow where from_id=? and to_id=?";
+        logger.info(sql);
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setLong(1, f_userId);
+        pst.setLong(2, t_userId);
+        ResultSet res = pst.executeQuery();
+        if (res.next()) {
+            succuess = 1;
+        }
+        DbUtil.close(connection, pst, res);
+        return succuess;
+    }
+
+    @Override
+    public void updateAvatar(int userId, String avatar) {
+        Connection connection = DbUtil.getConnection();
+        String sql = "update t_user set avatar = ? where id = ? ";
+        logger.info(sql);
+        try {
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setObject(1, avatar);
+            pst.setObject(2, userId);
+            int i = pst.executeUpdate();
+            DbUtil.close(connection, pst);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

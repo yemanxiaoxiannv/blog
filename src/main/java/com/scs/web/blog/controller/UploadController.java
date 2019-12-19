@@ -1,5 +1,8 @@
 package com.scs.web.blog.controller;
 
+import com.scs.web.blog.util.HttpUtil;
+import com.scs.web.blog.util.Result;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +30,7 @@ public class UploadController extends HttpServlet {
         System.out.println(path);
         //f:\\blog\\target\\blog\\1.jpg
         part.write(path + name);
+        HttpUtil.getResponseBody(resp, new Result(0, "http://localhost:9091/" + name));
         System.out.println(path + name);
         resp.setContentType("image/jpg");
         req.setAttribute("msg", "上传成功！");

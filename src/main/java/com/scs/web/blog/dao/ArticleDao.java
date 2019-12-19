@@ -78,4 +78,26 @@ public interface ArticleDao {
      * @throws SQLException
      */
     ArticleVo getArticle(long id) throws SQLException;
+
+    /**
+     *
+     * @param userId
+     * @param topicId
+     * @param title
+     * @param summary
+     * @param thumbnail
+     * @param content
+     */
+    void addArticle(int userId, int topicId, String title, String summary, String thumbnail, String content);
+
+
+    /**
+     *
+     * @param article
+     * @param userid
+     * @return
+     * @throws SQLException
+     */
+    boolean deleteArticle(long  article , long userid) throws SQLException;
+
 }

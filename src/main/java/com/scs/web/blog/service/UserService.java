@@ -1,7 +1,10 @@
 package com.scs.web.blog.service;
 
 import com.scs.web.blog.domain.dto.UserDto;
+import com.scs.web.blog.domain.dto.UserUpdateDto;
 import com.scs.web.blog.util.Result;
+
+import java.sql.SQLException;
 
 /**
  * @author xxcai
@@ -47,4 +50,74 @@ public interface UserService {
      * @return
      */
     Result selectByKeywords(String keywords);
+
+    /**
+     * 验证手机号是否可用
+     * @param mobile
+     * @return Result
+     */
+    Result checkMobile(String mobile);
+
+    /**
+     * 用户注册
+     * @param userDto
+     * @return Result
+     */
+    Result signUp(UserDto userDto);
+
+    /**
+     * 用户更新
+     * @param userUpdateDto
+     * @return
+     */
+    Result updateInfo(UserUpdateDto userUpdateDto);
+
+    /**
+     * 获取用户信息
+     * @param valueOf
+     * @return
+     */
+    Result getUserInfo(Long valueOf);
+
+    /**
+     *
+     * @param f_user
+     * @param t_user
+     * @return
+     */
+    Result addUserFans(long f_user , long t_user) throws SQLException;
+
+    /**
+     *
+     * @param f_user
+     * @param t_user
+     * @return
+     */
+    Result deleteUserFans(long f_user , long t_user) throws SQLException;
+
+    /**
+     *z
+     * @param f_user
+     * @param t_user
+     * @return
+     */
+    int selectUserFnas(long f_user , long t_user) throws SQLException;
+
+
+    /**
+     *
+     * @param userId
+     * @param avator
+     * @return
+     */
+    Result updateAvatar(int userId, String avator);
+
+
+    /**
+     *
+     * @param userid
+     * @return
+     */
+    Result getArtcileList(long userid) ;
 }
+

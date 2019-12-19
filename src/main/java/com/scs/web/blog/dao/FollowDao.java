@@ -38,4 +38,10 @@ public interface FollowDao {
      * @throws SQLException
      */
     List<Topic> getTopicFollows(long topicId) throws SQLException;
+
+    int unfollow(long fromId, long toId);
+
+    int follow(long fromId, long toId);
+
+    boolean isFollow(long fromId, long toId);
 }

@@ -2,8 +2,10 @@ package com.scs.web.blog.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.scs.web.blog.entity.Topic;
 import com.scs.web.blog.factory.ServiceFactory;
 import com.scs.web.blog.service.TopicService;
+import com.scs.web.blog.util.HttpUtil;
 import com.scs.web.blog.util.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * @author xxcai
@@ -31,6 +34,11 @@ public class TopicController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String uri = req.getRequestURI().trim();
+        if ("/api/topic/list".equals(uri)) {
+            List<Topic> topicList = topicService.getTopicList();
+            Result result = Result.success(topicList);
+            HttpUtil.getResponseBody(resp, result);
+        }
         if ("/api/topic".equals(uri)) {
             String page = req.getParameter("page");
             String keywords = req.getParameter("keywords");

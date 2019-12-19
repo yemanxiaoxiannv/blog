@@ -2,6 +2,8 @@ package com.scs.web.blog.service;
 
 import com.scs.web.blog.util.Result;
 
+import java.sql.SQLException;
+
 /**
  * @author xxcai
  * @ClassName ArticleService
@@ -42,4 +44,47 @@ public interface ArticleService {
      * @return
      */
     Result selectByKeywords(String keywords);
+
+    /**
+     * 添加喜欢
+     * @param article_id
+     * @param user_id
+     * @return
+     */
+
+    Result addByArticleAndUser(long article_id , long user_id );
+
+    /**
+     * 取消喜欢
+     * @param article_id
+     * @param user_id
+     * @return
+     */
+
+    Result deleteByArticleAndUser(long article_id , long user_id);
+
+    /***
+     * 查询是否喜欢
+     * @param article_id
+     * @param user_id
+     * @return
+     */
+    Result selectByArticleAndUser( long article_id , long user_id) ;
+
+    /**
+     *
+     * @param userId
+     * @param topicId
+     * @param title
+     * @param summary
+     * @param thumbnail
+     * @param content
+     */
+    void addArticle(int  userId, int topicId, String title, String summary, String thumbnail, String content);
+
+
+
+
+    Result deleteArticle(Long article , long userid) throws SQLException;
 }
+

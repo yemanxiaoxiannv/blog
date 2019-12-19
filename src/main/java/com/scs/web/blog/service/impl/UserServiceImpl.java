@@ -3,6 +3,7 @@ package com.scs.web.blog.service.impl;
 import com.scs.web.blog.dao.ArticleDao;
 import com.scs.web.blog.dao.UserDao;
 import com.scs.web.blog.domain.dto.UserDto;
+import com.scs.web.blog.domain.dto.UserUpdateDto;
 import com.scs.web.blog.domain.vo.ArticleVo;
 import com.scs.web.blog.domain.vo.UserVo;
 import com.scs.web.blog.entity.User;
@@ -121,5 +122,100 @@ public class UserServiceImpl implements UserService {
         } else {
             return Result.failure(ResultCode.RESULT_CODE_DATA_NONE);
         }
+    }
+
+    @Override
+    public Result checkMobile(String mobile) {
+        User user = null;
+        try {
+            user = userDao.findUserByMobile(mobile);
+        } catch (SQLException e) {
+            logger.error("根据手机号查询用户信息出现异常");
+        }
+        if (user == null) {
+            return Result.success(ResultCode.USER_NOT_EXIST);
+        } else {
+            return Result.failure(ResultCode.USER_HAS_EXISTED);
+        }
+    }
+
+    @Override
+    public Result signUp(UserDto userDto) {
+        User user = new User(userDto.getMobile(), DigestUtils.md5Hex(userDto.getPassword()));
+        try {
+            userDao.insert(user);
+            return Result.success();
+        } catch (SQLException e) {
+            logger.error("新增用户出现异常");
+            return Result.failure(ResultCode.USER_SIGN_UP_FAIL);
+        }
+    }
+
+    @Override
+    public Result updateInfo(UserUpdateDto userUpdateDto) {
+        userDao.updateInfo(userUpdateDto.getUserId(),
+                userUpdateDto.getAvatar(),
+                userUpdateDto.getNickname(),
+                userUpdateDto.getMobile(),
+                DigestUtils.md5Hex(userUpdateDto.getPassword()),
+                userUpdateDto.getGender(),
+                userUpdateDto.getBirthday(),
+                userUpdateDto.getIntroduction()
+        );
+        return Result.success();
+    }
+
+    @Override
+    public Result getUserInfo(Long id) {
+        try {
+            User user = userDao.findUserById(id);
+            return Result.success(user);
+        } catch (SQLException e) {
+            return Result.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
+    }
+
+    @Override
+    public Result addUserFans(long f_user, long t_user) throws SQLException {
+        boolean user = userDao.addUserFans(f_user, t_user);
+        return Result.success(user);
+    }
+
+    @Override
+    public Result deleteUserFans(long f_user, long t_user) throws SQLException {
+        boolean user = userDao.deleteUserFans(f_user, t_user);
+        return Result.success(user);
+    }
+
+    @Override
+    public int selectUserFnas(long f_user, long t_user) throws SQLException {
+        int user = userDao.selectUserFans(f_user, t_user);
+        return  user ;
+    }
+
+    @Override
+    public Result updateAvatar(int userId, String avatar) {
+        userDao.updateAvatar(userId, avatar);
+        return Result.success();
+    }
+
+    @Override
+    public Result getArtcileList(long userid) {
+        UserVo userVo = null;
+        try {
+            userVo = userDao.getUser(userid);
+        } catch (SQLException e) {
+            logger.error("根据id获取用户详情出现异常");
+        }
+        if (userVo != null) {
+            try {
+                List<ArticleVo> articleVoList = articleDao.selectByUserId(userid);
+                userVo.setArticleList(articleVoList);
+                return Result.success(userVo);
+            } catch (SQLException e) {
+                logger.error("根据用户id获取文章列表数据出现异常");
+            }
+        }
+        return Result.failure(ResultCode.RESULT_CODE_DATA_NONE);
     }
 }

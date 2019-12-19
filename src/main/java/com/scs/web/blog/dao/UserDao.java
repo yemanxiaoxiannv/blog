@@ -4,6 +4,7 @@ import com.scs.web.blog.domain.vo.UserVo;
 import com.scs.web.blog.entity.User;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -50,7 +51,8 @@ public interface UserDao {
 
     /**
      * 查询分页用户
-     *
+     * @param currentPage
+     * @param count
      * @return
      * @throws SQLException
      */
@@ -73,4 +75,51 @@ public interface UserDao {
      */
     List<User> selectByKeywords(String keywords) throws SQLException;
 
+
+    /**
+     * 根据用户id 获取用户
+     * @param id
+     * @return
+     */
+    User findUserById(Long id) throws SQLException;
+
+    /**
+     * 更新用户信息
+     * @param avatar
+     * @param nickname
+     * @param mobile
+     * @param md5Hex
+     * @param gender
+     * @param birthday
+     * @param introduction
+     */
+    boolean updateInfo(int userId, String avatar, String nickname, String mobile, String md5Hex, String gender, LocalDate birthday, String introduction);
+
+    /**
+     *
+     * @param f_userId
+     * @param t_userId
+     * @return
+     */
+    boolean addUserFans(long  f_userId ,long t_userId ) throws SQLException;
+
+    /**
+     *
+     * @param f_userId
+     * @param t_userId
+     * @return
+     */
+    boolean deleteUserFans(long  f_userId ,long t_userId ) throws SQLException;
+
+    /**
+     *
+     * @param f_userId
+     * @param t_userId
+     * @return
+     */
+    int selectUserFans(long  f_userId , long t_userId ) throws SQLException;
+
+
+
+    void updateAvatar(int userId, String avatar);
 }

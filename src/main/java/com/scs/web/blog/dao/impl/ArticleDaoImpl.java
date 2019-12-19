@@ -8,14 +8,11 @@ import com.scs.web.blog.util.DbUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 /**
- * @author xxcai
+ * @author mq_xu
  * @ClassName ArticleDaoImpl
  * @Description 文章Dao接口实现类
  * @Date 2019/11/10
@@ -140,7 +137,7 @@ public class ArticleDaoImpl implements ArticleDao {
                 "ON a.topic_id = b.id " +
                 "LEFT JOIN t_user c " +
                 "ON a.user_id = c.id " +
-                "WHERE a.topic_id = ? ";
+                "WHERE a.user_id = ? order by create_time desc ";
         PreparedStatement pst = connection.prepareStatement(sql);
         pst.setLong(1, userId);
         ResultSet rs = pst.executeQuery();
@@ -170,4 +167,44 @@ public class ArticleDaoImpl implements ArticleDao {
         DbUtil.close(connection, pst, rs);
         return articleVo;
     }
+
+    @Override
+    public void addArticle(int userId, int topicId, String title, String summary, String thumbnail, String content) {
+        Connection connection = DbUtil.getConnection();
+        String sql = "insert into t_article(user_id, topic_id, title, summary, thumbnail, content, likes, comments, create_time) " +
+                "values (?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setObject(1, userId);
+            pst.setObject(2, topicId);
+            pst.setObject(3, title);
+            pst.setObject(4, summary);
+            pst.setObject(5, thumbnail);
+            pst.setObject(6, content);
+            pst.setObject(7, 0);
+            pst.setObject(8, 0);
+            pst.setObject(9, new Timestamp(System.currentTimeMillis()));
+            int i = pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean deleteArticle(long article, long userid) throws SQLException {
+        Connection connection = DbUtil.getConnection();
+        boolean success = false ;
+        String sql = " delete from t_article where id = ? and user_id =? ";
+        PreparedStatement pst = connection.prepareStatement(sql);
+        pst.setLong(1, article);
+        pst.setLong(2, userid);
+        int rs =pst.executeUpdate();
+        if (rs > 0 ) {
+            success= true ;
+        }
+        DbUtil.close(connection, pst);
+        return success ;
+    }
+
+
 }
